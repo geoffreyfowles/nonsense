@@ -1,0 +1,18 @@
+.page {
+  height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(3rem - 1px); /* 1 px less than anchor nav height */
+}
+
+.header {
+  height: 100vh;
+}
+
+.section {
+  height: 50vh;
+}
+
+.footer {
+  height: 100vh;
+}

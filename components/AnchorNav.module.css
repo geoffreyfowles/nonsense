@@ -1,0 +1,39 @@
+.background {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0px;
+}
+
+.container {
+  position: sticky;
+  top: 0px;
+  display: flex;
+  overflow: auto;
+  scrollbar-width: none;
+  gap: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  scroll-behavior: smooth;
+}
+
+.activeHighlight {
+  background-color: var(--mantine-color-blue-light);
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 10%;
+  height: 80%;
+  transition-property: left, right;
+  transition-duration: 0.1s, 0.1s;
+  transition-timing-function: ease-in-out, ease-in-out;
+}
+
+.anchorLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: fit-content;
+  height: 3rem;
+  z-index: 1;
+  transition: color 0.2s;
+}
