@@ -17,6 +17,10 @@
   scroll-behavior: smooth;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .activeHighlight {
   background-color: var(--mantine-color-blue-light);
   border-radius: 0.5rem;
