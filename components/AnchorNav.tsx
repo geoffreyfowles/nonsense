@@ -5,6 +5,7 @@ import { Anchor, Box, Paper, px } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";
 import { useCallback, useEffect, useRef, useState } from "react";
 import classes from "./AnchorNav.module.css";
+import { useRouter } from "next/navigation";
 
 type Props = {
   anchors: Array<{
@@ -20,6 +21,7 @@ type Props = {
  * Active tab highlight rectangle with "stretch" animation
  */
 export default function AnchorNav({ anchors }: Props) {
+  const router = useRouter();
   const [anchorElements, setAnchorElements] = useState<Array<Element>>([]);
   const visibleElements = useVisibleElements(anchorElements, {
     rootMargin: `-${px("3rem")}px 0px 0px 0px`,
@@ -63,6 +65,13 @@ export default function AnchorNav({ anchors }: Props) {
         (activeAnchorLinkRect.right - activeAnchorLinkRect.left) / 2;
     },
     [anchorLinkAbsolutePosition, containerRef, containerWidth]
+  );
+
+  const scrollAnchorElementIntoView = useCallback(
+    (anchorIdx: number) => {
+      anchorElements[anchorIdx].scrollIntoView({ behavior: "smooth" });
+    },
+    [anchorElements]
   );
 
   useEffect(() => {
@@ -122,19 +131,21 @@ export default function AnchorNav({ anchors }: Props) {
           }}
         ></Box>
 
-        {anchors.map((anchor, idx) => (
+        {anchors.map((anchor, anchorIndex) => (
           <Anchor
             className={classes.anchorLink}
             key={anchor.id}
-            href={`#${anchor.id}`}
+            // href={`#${anchor.id}`} // use programmatic scrolling due to weird smooth scroll behaviour on firefox
             underline="never"
             ref={(el) => anchorLinkRefs.current.push(el!)}
-            c={idx === activeAnchorIndex ? "blue" : "inherit"}
+            c={anchorIndex === activeAnchorIndex ? "blue" : "inherit"}
             onClick={() => {
+              router.push(`#${anchor.id}`, { scroll: false });
               isScrollingRef.current = true;
               prevActiveAnchorIndexRef.current = activeAnchorIndex;
-              setActiveAnchorIndex(idx);
-              scrollAnchorLinkIntoView(idx);
+              setActiveAnchorIndex(anchorIndex);
+              scrollAnchorLinkIntoView(anchorIndex);
+              scrollAnchorElementIntoView(anchorIndex);
             }}
           >
             {anchor.title}
