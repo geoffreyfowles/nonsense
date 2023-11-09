@@ -69,7 +69,9 @@ export default function AnchorNav({ anchors }: Props) {
 
   const scrollAnchorElementIntoView = useCallback(
     (anchorIdx: number) => {
-      anchorElements[anchorIdx].scrollIntoView({ behavior: "smooth" });
+      anchorElements[anchorIdx].scrollIntoView({
+        behavior: "instant", // can change to "smooth" once google figures out how to make a browser https://stackoverflow.com/questions/49318497/google-chrome-simultaneously-smooth-scrollintoview-with-more-elements-doesn
+      });
     },
     [anchorElements]
   );
