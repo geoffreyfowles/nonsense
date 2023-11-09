@@ -1,8 +1,10 @@
 .page {
   height: 100vh;
+  width: 100vw;
   overflow: auto;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; https://github.com/hotwired/turbo/issues/400#issuecomment-1188241309 */
   scroll-padding-top: calc(3rem - 1px); /* 1 px less than anchor nav height */
+  position: fixed; /* https://stackoverflow.com/questions/72830064/sticky-html-element-gets-hidden-below-the-mobile-navigation-bar-in-chrome-fire, https://www.stevefenton.co.uk/blog/2022/12/mobile-position-sticky-issue/ */
 }
 
 .header {
