@@ -1,0 +1,5 @@
+.cursor {
+  position: fixed;
+  fill: crimson;
+  translate: -4px -2px; /* move visible tip of cursor to mouse position */
+}
